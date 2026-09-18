@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Hatch - Login</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#03045E',
+                        secondary: '#0077B6',
+                        accent: '#00B4D8'
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style> 
+        body { font-family: 'Inter', sans-serif; } 
+    </style>
+</head>
+<body class="flex h-screen w-full bg-slate-900 overflow-hidden">
+    
+    <!-- Left Panel: Login Form -->
+    <div class="w-full md:w-[450px] lg:w-[500px] flex flex-col justify-center px-8 md:px-12 bg-gradient-to-b from-[#03045E] to-[#0077B6] text-white relative z-10 shadow-2xl">
+        <!-- Header -->
+        <div class="mb-10 flex items-center gap-3 text-2xl font-bold">
+            <i class="ph-fill ph-egg text-accent text-3xl"></i>
+            Smart Hatch
+        </div>
+        
+        <h1 class="text-3xl font-bold mb-3">Selamat Datang Kembali</h1>
+        <p class="text-white/70 mb-10 text-sm leading-relaxed">Pantau dan kelola proses inkubasi telur Anda dengan mudah dan real-time.</p>
+        
+        <form id="login-form" class="space-y-5">
+            <div>
+                <label class="block text-sm font-medium mb-2 text-white/90">Email atau Username</label>
+                <div class="relative">
+                    <i class="ph ph-envelope absolute left-4 top-1/2 -translate-y-1/2 text-white/50 text-lg"></i>
+                    <input type="text" placeholder="Masukkan email atau username" required
+                        class="w-full bg-white/10 border border-white/20 rounded-xl px-11 py-3 outline-none focus:border-accent text-white placeholder-white/40 transition-colors">
+                </div>
+            </div>
+            <div>
+                <label class="block text-sm font-medium mb-2 text-white/90">Password</label>
+                <div class="relative">
+                    <i class="ph ph-lock absolute left-4 top-1/2 -translate-y-1/2 text-white/50 text-lg"></i>
+                    <input type="password" placeholder="Masukkan password" required
+                        class="w-full bg-white/10 border border-white/20 rounded-xl px-11 py-3 outline-none focus:border-accent text-white placeholder-white/40 transition-colors">
+                    <button type="button" class="absolute right-4 top-1/2 -translate-y-1/2 text-white/50 hover:text-white transition-colors">
+                        <i class="ph ph-eye"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="flex items-center justify-between text-sm pt-2">
+                <label class="flex items-center gap-2 cursor-pointer">
+                    <input type="checkbox" class="rounded border-white/20 bg-white/10 text-accent focus:ring-accent w-4 h-4">
+                    <span class="text-white/80">Ingat saya</span>
+                </label>
+                <a href="#" class="text-accent hover:text-white transition-colors font-medium">Lupa password?</a>
+            </div>
+            
+            <button type="submit" class="w-full bg-white text-[#03045E] hover:bg-slate-100 font-bold rounded-xl py-3.5 transition-colors mt-6 shadow-lg shadow-black/10 flex items-center justify-center gap-2">
+                <span>Masuk</span>
+            </button>
+        </form>
+        
+        <p class="text-center text-sm text-white/70 mt-10">
+            Belum punya akun? <a href="#" class="text-accent hover:text-white font-bold transition-colors">Daftar sekarang</a>
+        </p>
+        
+        <div class="absolute bottom-8 left-0 right-0 flex items-center justify-center gap-2 text-xs text-white/50">
+            <i class="ph-fill ph-leaf text-green-400"></i> Teknologi untuk Peternakan yang Lebih Baik
+        </div>
+    </div>
+    
+    <!-- Right Panel: Image Background -->
+    <div class="hidden md:block flex-1 relative bg-slate-900">
+        <!-- Overlay gradient to blend with the left panel -->
+        <div class="absolute inset-0 bg-gradient-to-r from-[#03045E]/90 via-[#03045E]/40 to-transparent z-10"></div>
+        <!-- Farm/Incubator aesthetic Image -->
+        <img src="https://images.unsplash.com/photo-1598442849506-c8ad81f19f20?q=80&w=1920&auto=format&fit=crop" 
+             alt="Incubator Dashboard" 
+             class="w-full h-full object-cover opacity-60 mix-blend-overlay">
+    </div>
+    
+    <script>
+        document.getElementById('login-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Visual loading effect
+            const btn = e.target.querySelector('button[type="submit"]');
+            btn.innerHTML = '<i class="ph ph-spinner-gap animate-spin text-xl"></i><span>Memproses...</span>';
+            btn.disabled = true;
+            btn.classList.add('opacity-80', 'cursor-not-allowed');
+            
+            // Simulate authentication delay, set auth token in session storage, then redirect
+            setTimeout(() => {
+                sessionStorage.setItem('smart_hatch_auth', 'true');
+                window.location.href = 'index.html';
+            }, 1000); // 1 second delay
+        });
+    </script>
+</body>
+</html>
